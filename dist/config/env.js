@@ -12,10 +12,9 @@ const envSchema = zod_1.z.object({
     NODE_ENV: zod_1.z
         .enum(['development', 'production', 'test'])
         .default('development'),
-    EMAIL_HOST: zod_1.z.string().default('smtp.gmail.com'),
-    EMAIL_PORT: zod_1.z.string().default('465'),
-    EMAIL_USER: zod_1.z.string().email(),
-    EMAIL_PASS: zod_1.z.string().min(1),
+    ALLOWED_ORIGINS: zod_1.z
+        .string()
+        .default('http://localhost:3000,http://localhost:3001'),
     APP_URL: zod_1.z.string().url(),
 });
 const _env = envSchema.safeParse(process.env);

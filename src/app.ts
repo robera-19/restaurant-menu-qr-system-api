@@ -20,14 +20,6 @@ import { errorHandler } from './middlewares/error.middleware';
 
 const app: Application = express();
 
-app.get('/', (req, res) => {
-  res.json({
-    message: 'Welcome to Ethio Buna Restaurant API',
-    version: '1.0.0',
-    status: 'Running',
-  });
-});
-
 // ==========================================
 // 1. GLOBAL MIDDLEWARES
 // ==========================================
@@ -55,6 +47,14 @@ app.use(
 );
 app.use(morgan('dev'));
 app.use(express.json());
+
+app.get('/', (req, res) => {
+  res.json({
+    message: 'Welcome to Ethio Buna Restaurant API',
+    version: '1.0.0',
+    status: 'Running',
+  });
+});
 
 app.use('/uploads', express.static(path.join(process.cwd(), 'uploads')));
 

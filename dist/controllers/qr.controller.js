@@ -42,11 +42,11 @@ const handleRedirect = async (req, res, next) => {
         const { shortId } = req.params;
         const qr = await qr_service_1.QrService.getByShortId(shortId);
         if (!qr)
-            return res.status(404).send("Invalid QR Code");
+            return res.status(404).send('Invalid QR Code');
         // Background: Log the scan (no await to keep redirect fast)
         qr_service_1.QrService.logScan(qr.id);
         // Redirect to your frontend URL
-        const frontendUrl = `http://localhost:3000`;
+        const frontendUrl = `https://restaurant-menu-qr-customer.vercel.app/menu/qr/${shortId}`;
         res.redirect(frontendUrl);
     }
     catch (error) {

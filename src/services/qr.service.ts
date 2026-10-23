@@ -28,7 +28,7 @@ export const QrService = {
 
   // 4. Generate the actual printable QR image
   generateImage: async (shortId: string) => {
-    const backendUrl = `https://restaurant-menu-qr-system-production.up.railway.app/q/${shortId}`;
+    const backendUrl = `https://restaurant-menu-qr-system-api-src.vercel.app/q/${shortId}`;
     // Returns a Base64 Data URL that you can put in an <img src="...">
     return await QRCode.toDataURL(backendUrl, {
       width: 512,

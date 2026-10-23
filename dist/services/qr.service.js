@@ -7,7 +7,6 @@ exports.QrService = void 0;
 const prisma_1 = require("../config/prisma");
 const nanoid_1 = require("nanoid");
 const qrcode_1 = __importDefault(require("qrcode"));
-const env_1 = require("../config/env");
 exports.QrService = {
     // 1. Create a new QR entry in DB
     create: async (name, adminId) => {
@@ -29,20 +28,20 @@ exports.QrService = {
     },
     // 4. Generate the actual printable QR image
     generateImage: async (shortId) => {
-        const redirectUrl = `http://localhost:${env_1.env.PORT}/q/${shortId}`;
+        const backendUrl = `https://restaurant-menu-qr-system-api-src.vercel.app/q/${shortId}`;
         // Returns a Base64 Data URL that you can put in an <img src="...">
-        return await qrcode_1.default.toDataURL(redirectUrl, {
+        return await qrcode_1.default.toDataURL(backendUrl, {
             width: 512,
             margin: 2,
             color: {
-                dark: "#000000",
-                light: "#ffffff",
+                dark: '#000000',
+                light: '#ffffff',
             },
         });
     },
     // 5. Get all QRs for the Admin list
     getAll: () => prisma_1.prisma.qrCode.findMany({
         include: { _count: { select: { scans: true } } },
-        orderBy: { createdAt: "desc" },
+        orderBy: { createdAt: 'desc' },
     }),
 };
